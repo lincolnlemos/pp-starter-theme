@@ -1,7 +1,7 @@
 {
-  "name": "bathe",
-  "version": "0.5.2",
-  "description": "WordPress starter theme including full setup for gulp, Webpack, Sass, Autoprefixer, Bourbon/Neat/Bitters, imagemin, Browsersync, PostCSS etc.",
+  "name": "pp-framework-theme",
+  "version": "0.0.1",
+  "description": "WordPress starter theme including full setup for gulp, Webpack, Sass, Autoprefixer, Bourbon/Neat/Bitters, imagemin, Browsersync, PostCSS etc based at wp-bathe.",
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wp-bathe/bathe.git"
+    "url": "https://lincolnlemos@bitbucket.org/partnerprogrammer/pp-framework-theme.git"
   },
   "keywords": [
     "WordPress",
@@ -29,12 +29,9 @@
     "Browsersync",
     "Webpack"
   ],
-  "author": "Kite",
-  "license": "GPL-2.0+",
-  "bugs": {
-    "url": "https://github.com/wp-bathe/bathe/issues"
-  },
-  "homepage": "https://github.com/wp-bathe/bathe",
+  "author": "Lincoln Lemos",
+  "license": "MIT License",
+  "homepage": "https://bitbucket.org/partnerprogrammer/pp-framework-theme",
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
@@ -42,7 +39,6 @@
     "browser-sync": "^2.24.7",
     "eslint-config-google": "^0.9.1",
     "eslint-loader": "^2.0.0",
-    "flag-icon-css": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
     "gulp-eslint": "^4.0.2",

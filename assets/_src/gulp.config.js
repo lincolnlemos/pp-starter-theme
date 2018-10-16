@@ -11,7 +11,7 @@ module.exports = {
   assets: './assets',
 
   browsersync: {
-    siteurl: 'mysite.test',
+    siteurl: 'framework.pp',
   },
 
   eslintLoader: {

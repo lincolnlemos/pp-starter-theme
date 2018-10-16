@@ -1,5 +1,5 @@
 const browsersync = require('browser-sync').create();
-const config      = require('../bathe.config.js');
+const config      = require('../gulp.config.js');
 const gulp        = require('gulp');
 
 gulp.task('browsersync', function () {

@@ -1,6 +1,6 @@
 const argv          = require('yargs').argv;
 const babel         = require('gulp-babel');
-const config        = require('../bathe.config.js');
+const config        = require('../gulp.config.js');
 const gulp          = require('gulp');
 const named         = require('vinyl-named');
 const plumber       = require('gulp-plumber');
