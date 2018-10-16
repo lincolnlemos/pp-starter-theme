@@ -1,0 +1,15 @@
+
+/* ACF Fields only to user-1 */
+/* ----------------------------------------- */
+	body {
+		#toplevel_page_edit-post_type-acf-field-group {
+			display: none;
+		}
+		
+		&.user-1 {
+			#toplevel_page_edit-post_type-acf-field-group {
+				display: block !important;
+			}
+		}
+	}
+/* ----------------------------------------- ACF Fields only to user-1 */		

@@ -1,0 +1,20 @@
+@import "bootstrap/functions";
+@import "variables";
+
+body.login {
+  background-color: theme-color('primary');
+  
+  #wp-submit {
+      background-color: theme-color('primary');
+      border: 1px solid darken(theme-color('primary'), 5%) !important;
+      box-shadow: none;
+      text-shadow: none;
+      border-radius: 0;
+      transition: 250ms ease all;
+
+    &:hover {
+      background-color: darken(theme-color('primary'), 10%) !important;
+    }
+  }
+
+}

@@ -1,0 +1,346 @@
+
+// Footer always on bottom
+// Main will fill all remaining space
+/* ----------------------------------------- */
+  html {
+    height: 100%; 
+  }
+  body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    main {
+      flex-grow: 1;
+    }
+  }  
+/* ----------------------------------------- Footer always on bottom */    
+
+
+/* Highlights */
+/* ----------------------------------------- */
+  h1, h2, h3, h4, h5, h6, p, a, li, span {
+    &::selection, &::-moz-selection, &::-webkit-selection {
+      background-color: theme-color("primary");
+      color:#fff;
+    }
+  }
+/* ----------------------------------------- Highlights */    
+
+/* Forms, inputs, etc */
+/* ----------------------------------------- */
+  input, textarea, select {
+    outline-color: theme-color("primary");
+  }
+  select {
+    option {
+      color: black;
+    }
+  }
+/* ----------------------------------------- Forms, inputs, etc */    
+
+
+/* Botões */
+/* ----------------------------------------- */
+  .btn-icon {
+    position: relative;
+    border: 0;
+    i {
+      top: 0;
+      position: absolute;
+      height: 100%;
+      width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }    
+  }
+  .btn-icon-left {
+    @extend .btn-icon;
+    padding-left: 70px;
+    i {
+      left: 0;    
+    }
+  }
+  .btn-icon-right {
+    @extend .btn-icon;
+    padding-right: 70px;
+    i {
+      right: 0;     
+    }
+  }
+
+/* ----------------------------------------- Botões */    
+
+/* Sidebar Fixed */
+/* ----------------------------------------- */
+  
+  .sidebar{
+    will-change: min-height;
+  }
+
+  .sidebar__inner{
+    transform: translate(0, 0); /* For browsers don't support translate3d. */
+    transform: translate3d(0, 0, 0);
+    will-change: position, transform;
+  }
+/* ----------------------------------------- Sidebar Fixed */    
+
+
+/* WP Page Nav */
+/* ----------------------------------------- */
+  .wp-pagenavi {
+    margin-top: 40px;
+    a, span {
+      border: 0 !important;
+      border-bottom: 1px solid #BFBFBF !important;
+    }
+  }
+/* ----------------------------------------- WP Page Nav */   
+
+
+/* Sticky Object */
+/* ----------------------------------------- */
+  .sticket-object {
+    &.sticky {
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      left: 0;      
+      z-index: 100;
+    }
+  }
+/* ----------------------------------------- Sticky Object */   
+
+
+/* Contact Form 7 */
+/* ----------------------------------------- */
+  .wpcf7 {    
+    .hide-success {
+      .wpcf7-mail-sent-ok {
+        display: none !important;
+      }
+    } 
+    
+    // Quebra a linha no response para formulários inline
+    .form-inline {
+      &:after {
+        content: '';
+        width: 100%;
+      }
+      .wpcf7-response-output {
+        order: 1;
+      }
+    }   
+  }
+/* ----------------------------------------- Contact Form 7 */    
+
+
+/* 
+  Responsive container style 
+  functions/setup @wrap_embed_with_div()
+/* ----------------------------------------- */
+  .responsive-container {
+    position: relative;
+    padding-bottom: 50.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 1em;
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+/* ----------------------------------------- Responsive container style */    
+
+
+
+/* WordPress WYSIWYG Editor Styles */
+/* ----------------------------------------- */
+  .hentry {   
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    a { 
+      color: theme-color("primary");
+      &:hover { text-decoration: underline;}
+    }
+    .entry-content img {
+      margin: 0 0 1.5em 0;
+    }
+    .alignleft, img.alignleft {
+      margin-right: 1.5em;
+      display: inline;
+      float: left;
+      }
+    .alignright, img.alignright {
+      margin-left: 1.5em;
+      display: inline;
+      float: right;
+      }
+    .aligncenter, img.aligncenter {
+      margin-right: auto;
+      margin-left: auto;
+      display: block;
+      clear: both;
+      }
+    .alignnone, img.alignnone {
+    /* not sure about this one */
+    }
+    .wp-caption {
+      margin-bottom: 1.5em;
+      text-align: center;
+      padding-top: 5px;
+      img {     
+        border: 0 none;
+        padding: 0;
+        margin: 0;          
+      }
+      p.wp-caption-text {
+        line-height: 1.5;
+        font-size: 10px;
+        margin: 0;
+      }
+    }
+    
+    .wp-smiley {
+      margin: 0 !important;
+      max-height: 1em;
+    }
+    blockquote.left {
+      margin-right: 20px;
+      text-align: right;
+      margin-left: 0;
+      width: 33%;
+      float: left;
+    }
+    blockquote.right {
+      margin-left: 20px;
+      text-align: left;
+      margin-right: 0;
+      width: 33%;
+      float: right;
+    }
+  }
+/* ----------------------------------------- WordPress WYSIWYG Editor Styles */   
+
+/* Default Style Dropdown */
+/* ----------------------------------------- */
+      
+  .select-box {   
+    // background-color: white;    
+    position: relative;
+    // border: 1px solid fade(theme-color("primary"), 20%);
+    z-index: 2;
+    // height: 100%;
+    width: 100%;
+
+    select {    
+      appearance: none;
+      position:relative;
+      z-index: 2;
+      width: 100%;      
+      margin: 0 !important;
+      display: inline-block;      
+      border: 0;
+      border-radius: 0px;             
+      // color: theme-color("primary");        
+      padding-right: 30px;
+      &:hover {
+        cursor: pointer;
+      }
+    }     
+    
+    &:after {
+      // content:"\f078";
+      // content:"\f13a";
+      // font-family: FontAwesome;       
+      // position:absolute;
+      // right: 8px;
+      // top: 50%;
+      // color: theme-color("primary");        
+      // z-index:10;        
+      // font-size: 22px;
+      // line-height:10%;      
+    }
+  }
+/* ----------------------------------------- Default Style Dropdown */    
+
+/* ACF Map */
+/* ----------------------------------------- */
+  
+  .acf-map {
+    height: 400px;
+    img {
+      max-width: inherit !important;
+    }
+  } 
+
+/* ----------------------------------------- ACF Map */   
+
+/* Bootstrap Navbar Toggle Close Animation 
+ * Usage:
+ * Remove <span> inside .navbar-toggler
+ * Insert new 3 <span> in .navbar-toggler
+ * Add class .animation-close-toggle to navbar element
+ * Add class .collapsed in button.navbar-toggler
+/* ----------------------------------------- */
+  .navbar.animation-close-toggle {
+
+    .navbar-toggler {
+      position: relative;
+      height: 35px;
+
+      &:focus, &:active {
+        outline: 0;
+      } // &:focus, &:active
+
+      span {
+        display: block;
+        background-color: theme-color('secondary');
+        height: 3px;
+        width: 35px;
+        margin-top: 4px;
+        margin-bottom: 4px;      
+        transform: rotate(0deg);
+        position: relative;
+        left: 0;
+        opacity: 1;
+        &:nth-child(1), &:nth-child(3) {
+          transition: transform .35s ease-in-out;
+        } // &:nth-child(1), &:nth-child(3)
+      } //span
+      
+      &:not(.collapsed) {
+        span:nth-child(1) {
+          position: absolute;
+          left: 12px;
+          top: 10px;
+          transform: rotate(135deg);
+          opacity: 0.9;
+        } // span:nth-child(1) 
+
+        span:nth-child(2) {
+            height: 12px;
+            visibility: hidden;
+            background-color: transparent;
+        }
+        
+        span:nth-child(3) {
+            position: absolute;
+            left: 12px;
+            top: 10px;
+            transform: rotate(-135deg);
+            opacity: 0.9;
+        }
+
+      } //&:not(.collapsed)
+
+    } // .navbar-toggler
+  }
+/* ----------------------------------------- Bootstrap Navbar Toggle Close Animation */     

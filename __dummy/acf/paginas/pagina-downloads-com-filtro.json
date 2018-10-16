@@ -1,0 +1,129 @@
+[
+    {
+        "key": "group_59c94fb7e9791",
+        "title": "Conteúdo [Downloads com filtro]",
+        "fields": [
+            {
+                "key": "field_59c94fb7ec211",
+                "label": "Categorias",
+                "name": "categorias",
+                "type": "repeater",
+                "instructions": "Os arquivos são disponibilizados por categoria. Insira as categorias, depois insira os itens.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "block",
+                "button_label": "Adicionar categoria",
+                "sub_fields": [
+                    {
+                        "key": "field_59c94fb7edf5c",
+                        "label": "Título da categoria",
+                        "name": "titulo_categoria",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_59c94fb7edfca",
+                        "label": "Itens para download",
+                        "name": "itens",
+                        "type": "repeater",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "collapsed": "",
+                        "min": 0,
+                        "max": 0,
+                        "layout": "block",
+                        "button_label": "Adicionar Item",
+                        "sub_fields": [
+                            {
+                                "key": "field_59c94fb7f1d4d",
+                                "label": "Capa",
+                                "name": "capa",
+                                "type": "image",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "50",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "array",
+                                "preview_size": "thumbnail",
+                                "library": "all",
+                                "min_width": "",
+                                "min_height": "",
+                                "min_size": "",
+                                "max_width": "",
+                                "max_height": "",
+                                "max_size": "",
+                                "mime_types": ""
+                            },
+                            {
+                                "key": "field_59c94fb7f1dbb",
+                                "label": "Arquivo",
+                                "name": "arquivo",
+                                "type": "file",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "50",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "array",
+                                "library": "all",
+                                "min_size": "",
+                                "max_size": "",
+                                "mime_types": ""
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-templates\/page-downloads-com-filtro.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "seamless",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    }
+]

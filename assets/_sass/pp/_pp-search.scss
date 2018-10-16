@@ -1,0 +1,115 @@
+
+/* Search */
+/* ----------------------------------------- */
+	
+	body.search-box-results {
+		overflow: hidden;
+		#search-box {
+			bottom: 0;
+			overflow-y: scroll;
+			height: 100%;
+		}	
+
+		#header-box {			
+			box-shadow: 0 2px 34px 0 rgba(0,0,0,0.43);
+			margin-bottom: 30px;
+		}
+	}
+
+	#search-box {
+		position: fixed;
+		top: 0;
+		transform: translateY(-100%);
+		transition: 400ms ease-in-out all;
+		opacity: 0;
+		
+		width: 100%;
+		max-width: 100vw;
+		z-index: 200;
+		
+		background-color: rgba(white, .98);
+		#header-box {
+			padding-top: 50px;
+			padding-bottom: 50px;
+			transition: 400ms ease-in-out all;
+		}
+
+		// > .container {
+		// 	overflow-y: scroll;
+		// 	height: 100%;
+		// }
+		.col-md-10 {
+			position: relative;
+			> div {
+				position: relative;
+			}
+		}
+
+		input {
+			&[type="search"] {
+				border: 0;
+				border-bottom: 1px solid lightgray;
+				border-radius: 0;
+				font-weight: 300;
+				line-height: 30px;		
+				margin-bottom: 0;			
+				font-size: 20px;
+				background-color: transparent;
+				width: 100%;	
+				color: theme-color('grey-blue');
+				&::placeholder {
+					color: theme-color('grey-blue');
+				}			
+				&:focus {
+					outline: none;
+					border-bottom-color: theme-color(gray-dark);
+				}
+			}
+		}
+		
+		&.open {
+			transform: translateY(0%);
+			opacity: 1;
+		}  
+
+		i.status-icon {
+			position: absolute;
+			right: 8px;
+			top: calc( 50% - 4px);
+			cursor: pointer;
+			transform: rotate(0deg);
+
+			&.spin {
+				animation: spin 1s infinite linear;
+			}
+		}
+		a {
+			&:hover {
+				text-decoration: none !important;
+				.text-headline-normal {
+					color: theme-color(brown);
+				}
+			}				
+		}
+
+	}
+
+
+/* ----------------------------------------- Search */	
+
+
+/* Animação */
+/* ----------------------------------------- */
+	@-moz-keyframes spin {
+	    from { -moz-transform: rotate(0deg); }
+	    to { -moz-transform: rotate(360deg); }
+	}
+	@-webkit-keyframes spin {
+	    from { -webkit-transform: rotate(0deg); }
+	    to { -webkit-transform: rotate(360deg); }
+	}
+	@keyframes spin {
+	    from {transform:rotate(0deg);}
+	    to {transform:rotate(360deg);}
+	}
+/* ----------------------------------------- Animação */		
