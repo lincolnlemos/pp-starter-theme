@@ -48,6 +48,25 @@
     remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
   }
 
+
+  // Remove metabox from taxonomies
+  add_action('admin_menu', 'disable_metabox_from_taxonomies');
+  function disable_metabox_from_taxonomies() {
+      global $pagenow;
+      if (in_array($pagenow, ['post.php', 'post-new.php'])) {
+          
+          $post_type = $pagenow == 'post-new.php' ? $_GET['post_type'] : get_post_type($_GET['post']);
+          
+          $taxonomies = get_object_taxonomies($post_type);
+
+          if ($taxonomies) {
+              foreach ($taxonomies as $tax ) {
+                  remove_meta_box('tagsdiv-'. $tax, $post_type , 'side');
+              }
+          }
+      }    
+  }
+
 /* ----------------------------------------- DASHBOARD */    
   
 
