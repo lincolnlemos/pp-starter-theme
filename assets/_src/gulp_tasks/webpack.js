@@ -20,7 +20,7 @@ config.webpack.mode = argv.mode || config.webpack.mode;
 
 gulp.task('webpack', function () {
   return gulp.src(entry)
-    .pipe(plumber())
+    // .pipe(plumber())
     .pipe(named())
     .pipe(babel())
     .pipe(webpackStream(config.webpack, webpack))

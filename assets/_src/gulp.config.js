@@ -22,14 +22,14 @@ module.exports = {
   },
 
   imagemin: {
-    src:         '_images',
+    src:         '_src/_images',
     dest:        'images',
     progressive: true,
     svgoPlugins: [{removeViewBox: false}],
   },
 
   js: {
-    src:   '_js',
+    src:   '_src/_js',
     dest:  'js',
     entry: [
       'main.js',
@@ -37,7 +37,7 @@ module.exports = {
   },
 
   sass: {
-    src:          '_sass',
+    src:          '_src/_sass',
     dest:         'css',
     outputStyle:  'compressed',
     autoprefixer: {

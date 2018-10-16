@@ -260,11 +260,11 @@ function clear_url($input) {
 
 }
 
-function _partial($file) {  
-  include PP_PARTIAL_PATH . $file.'.php';
+function _partial($file) {    
+  echo get_template_part('template-parts/partials/' . $file);
 }
-function _loop($file) {  
-  include PP_LOOP_PATH . 'loop-'.$file.'.php';
+function _loop($file) { 
+  echo get_template_part('template-parts/loops/loop-' . $file);  
 }
 
 function images_url($file) {
