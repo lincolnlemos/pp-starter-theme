@@ -2,14 +2,11 @@
 Theme Name: 	PP Framework Theme
 Theme URI: 		http://partnerprogrammer.com
 Description: 	A simple WordPress starter theme by the Partner Programmer team.
-Version: 		1.0
+Version: 		1.0.1
 Author: 		Partner Programmer <wp@partnerprogrammer.com>
 Text Domain: 	pp
 BitBucket Theme URI: partnerprogrammer/pp-framework-theme
 License:            MIT License
 License URI:        http://opensource.org/licenses/MIT
 */
-
-@import "assets/css/bootstrap.css";
-@import "assets/css/theme.css";
 
