@@ -1,0 +1,50 @@
+{# 
+    sliders =>  [
+        title
+        description
+        cta
+        image
+    ]
+#}
+{# {{ fn('pp_debug', sliders ) }} #}
+
+{% if data %}
+    
+    <div 
+        {# id="{{ sectionID }}"  #}
+        class="{{ class.slider|default('carousel carousel--default') }}"
+    >        
+        {% for slider in sliders %}
+            
+            {# Define Variables #}
+            {% set hasLink = slider.cta.url ? true : false %}
+
+            <{{ hasLink ? 'a' : 'div' }} 
+                class="{{ hasLink ? 'anchor--default' }}{{ class.slideContainer|default('carousel--item pos--rel d-flex flex-column align-items-center justify-content-center') }}"
+                {{ hasLink ? 'href="' ~ slider.link.url ~ '"'}}                
+            >
+
+                {% if slider.title %}
+                    <p class="{{ class.sectionTitle|default('carousel--title') }}">{{ slider.title }}</p>
+                {% endif %}            
+                
+                
+                {% if slider.description %}
+                    <p class="{{ class.sectionDescription|default('carousel--description') }}">{{ slider.description }}</p>
+                {% endif %}            
+                
+                {% if slider.image %}                
+                    {{ fn('_p', 'img:acf-image',slider.image) }}
+                {% endif %}
+                
+                {% if slider.cta %}
+                    {% include 'acf/link.twig' with { data: slider.cta } %}
+                {% endif %}   
+
+            </{{ hasLink ? 'a' : 'div' }} >
+
+        {% endfor %}                 
+    
+    </div>
+
+{% endif %}

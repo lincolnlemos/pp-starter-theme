@@ -1,0 +1,33 @@
+{% if sliders %}
+    
+    <div id="{{ sectionID }}" class="{{ class.slider|default('slide slide--default slide--fullbg') }}">
+        
+        {% for slider in sliders %}
+        
+            <a 
+                class="anchor--default {{ class.slideContainer|default('pos--rel slide--container d-flex align-items-center justify-content-center') }}"
+                href="{{ slider.link.url|default('#') }}"
+            >
+                {% include 'els/image-cover.twig' with { data: slider.image } %}
+
+                <div class="{{ class.slideContent|default('slide--content text-center') }}">
+                    
+                    {% if slider.title %}
+                        <h2 class="{{ class.slideTitle|default('slide--title') }}" >{{ slider.title }}</h2>
+                    {% endif %}
+                    
+                    {% if slider.description %}
+                        <p class="{{ class.slideTitle|default('slide--description') }}">{{ slider.description }}</p>
+                    {% endif %}
+                    
+                    {% include 'acf/link.twig' with { data: slider.link, layout: configs.button|default('button')  } %}
+
+                </div>
+
+            </a>
+
+        {% endfor %}
+    
+    </div>
+
+{% endif %}

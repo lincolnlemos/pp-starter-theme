@@ -3,12 +3,14 @@
   $logotipo = get_field('logotipo', 'options');
 ?>
   <div class="row">
-    <nav id="navmenu" class="navbar navbar-expand-lg navbar-light animation-close-toggle w-100">
-      <a class="navbar-brand col" href="<?php echo get_home_url(); ?>"> 
+
+    <nav class="navbar">
+
+      <a class="navbar--logo d-inline-block" href="<?php echo get_home_url(); ?>"> 
         
         <?php         
           // Se existir um $logotipoMobile cadastrado, altera as classes
-          $logotipoCssClass = $logotipoMobile ? 'd-none d-md-inline-block' : 'd-inline-block';
+          $logotipoCssClass = $logotipoMobile ? 'd-none d-lg-inline-block' : 'd-inline-block';
           // Se estiver cadastrado o logotipo, exibe o mesmo. 
           // Caso contrário exibe o nome do site          
           $headerName = $logotipo ? 
@@ -17,27 +19,26 @@
           echo $headerName;
 
           // Se existir logo para mobile, exibe-o
-          echo ($logotipoMobile ? '<img src="'. $logotipoMobile .'" height="30" class="d-inline-block d-md-none img-fluid align-top" alt="Logotipo '.get_bloginfo().'">' : '');
+          echo ($logotipoMobile ? '<img src="'. $logotipoMobile .'" height="30" class="d-inline-block d-lg-none img-fluid align-top" alt="Logotipo '.get_bloginfo().'">' : '');
 
         ?>
         
       </a>
+            
+      <span class="header--toggler js-toggle-menu d-inline-block d-lg-none icon-toggle" data-bodyclass="mobilemenu--open"></span>
+      <span class="header--searchicon d-inline-block icon-search d-lg-none"></span>
       
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="navbar--container">
 
-        <?php 
-          wp_nav_menu( array(         
-            'theme_location'    => 'primary',
-            'depth'             => 3,
-            'container'         => 'div',
-            'container_class'   => 'collapse navbar-collapse',            
-            'container_id'      => 'navbarNav',
-            'menu_class'        => 'navbar-nav ml-auto', // A classe mr-auto alinha o menu a direita
-            'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-            'walker'            => new WP_Bootstrap_Navwalker()
-          )); 
-        ?>          
+        <div class="navbar--navigation d-md-none">
+          <div class="navbar--navigation--back"><span></span></div>
+          <div class="navbar--navigation--current"></div>
+          <div class="navbar--navigation--close js-toggle-menu" data-bodyclass="mobilemenu--open"><span></span></div>
+        </div>
+
+        <?php wp_nav_menu(['theme_location' => 'primary','container' => false, 'menu_class' => 'navbar--menu']); ?> 
+
+      </div>         
+
     </nav><!-- /.navbar-collapse -->    
   </div>
