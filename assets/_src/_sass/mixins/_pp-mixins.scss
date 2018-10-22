@@ -1,18 +1,2 @@
-
-@import "bootstrap/functions";
-@import "bootstrap/mixins";
-@import "variables";
-@import "pp/pp-styles";
-@import "pp/pp-search";
-@import "pp/pp-blocks";
-
-// Separate Views by files
-// @import "sprites"; 
-
-@import "views/view-common"; // all medias
-@import "views/view-only-xs"; 
-@import "views/view-until-expand"; 
-@import "views/view-sm"; 
-@import "views/view-md"; 
-@import "views/view-lg"; 
-@import "views/view-xl"; 
+@import "*";
+@import "**/*";
