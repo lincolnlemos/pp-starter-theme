@@ -1,0 +1,28 @@
+{# 
+    data => [title,url,target]
+    layout => (
+        button => will not create anchor
+        default => will create anchor
+    )
+#}
+{% if data %}
+    
+    {% set layout = layout|default('default') %}
+    {% set htmlTag = layout == 'button' ? 'span' : 'a' %}
+
+    <{{ htmlTag }} 
+        class="btn" 
+        title="{{data.title}}"        
+        
+        {% if layout == 'default' %}
+            {# Add href if is a link #}
+            href="{{ data.url }}"
+            {# Add target if is a link #}
+            target="{{ data.target|default('_self') }}"
+        {% endif %}
+    >
+
+        {{ data.title|default('Saiba Mais') }}
+
+    </{{ htmlTag }}>
+{% endif %}

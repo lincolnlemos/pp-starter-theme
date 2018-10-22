@@ -21,11 +21,7 @@
 
 	<body <?php body_class(); ?>>
 
-		<header id="header">			
-			<div class="container">
-				<?php _partial('_menu-nav'); ?>					
-			</div>
-		</header>
+		<?php do_action('pp_header', 1); ?>
 
 
 

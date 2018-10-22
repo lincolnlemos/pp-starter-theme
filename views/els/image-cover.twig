@@ -1,0 +1,8 @@
+{# 
+    data => imageID    
+#}
+{% if data %}    
+    <figure class="slide--image figure--cover m-0">        
+        <img src="{{ Image(data).src }}" alt="{{ Image(data).alt }}"  alt="{{ Image(data).title }}">
+    </figure>
+{% endif %}

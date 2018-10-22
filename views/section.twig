@@ -1,0 +1,47 @@
+{# 
+    data =>  [
+        title
+        description
+        cta
+        tipo_de_background (Cor,Imagem)
+        cor
+        image
+    ]
+    hasContainer => (container, fullwidth)
+    tagTitle => (true, false)
+    class => [
+        container
+    ]
+#}
+
+{% if data %}
+    
+    <div 
+        id="{{ sectionID }}" 
+        class="section {{ not hasContainer ? 'container' }}{{ class.container|default('text-center') }}"
+        {{ fn('set_inline_background', data) }}        
+    >
+
+        {{ hasContainer ? '<div class="container">' }}
+           
+            {% if data.titulo %}
+                <{{tagTitle|default('h2')}} class="{{ class.title|default('section--subtitle') }}" >{{ data.titulo }}</{{tagTitle|default('h2')}}>
+            {% endif %}
+            
+            {% if data.descricao %}
+                <p class="{{ class.description|default('section--description') }}">{{ data.descricao }}</p>
+            {% endif %}
+            
+            {% if data.carousel %}                
+                {% include 'carousels/carousel-default.twig' with { sliders: data.carousel } %}
+            {% endif %}
+            
+            {% if data.cta %}
+                {% include 'acf/link.twig' with { data: data.cta } %}
+            {% endif %}            
+
+        {{ hasContainer ? '</div>' }}
+    
+    </div>
+
+{% endif %}

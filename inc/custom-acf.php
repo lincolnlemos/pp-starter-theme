@@ -59,21 +59,33 @@
 
 /** Add filters to ACF-JSON **/
   
-  // Save at child theme
-  add_filter('acf/settings/save_json', function() {
-    return get_stylesheet_directory() . '/acf-json';
+  // Save acf-jsons
+  add_filter('acf/settings/save_json', function($path) {
+    
+    // Default save path to theme
+    $return = get_stylesheet_directory() . '/inc/acf-json';
+
+    // If the ACF Post Title starts with [PARENT] , save at parent theme
+    $acfTitle = get_the_title(get_the_ID());
+    if ($acfTitle && is_string($acfTitle) && substr($acfTitle, 0, 8) == '[PARENT]') {
+      $return = get_template_directory() . '/inc/acf-json';
+    }    
+    return $return;
   });
 
   // Load from parent and child theme
   add_filter('acf/settings/load_json', function($paths) {
-    $paths = array(get_template_directory() . '/acf-json');
+    $paths = array(get_template_directory() . '/inc/acf-json');
 
-    if(is_child_theme())
-    {
-      $paths[] = get_stylesheet_directory() . '/acf-json';
-    }
+      if(is_child_theme()){
+          $paths = array(
+              get_stylesheet_directory() . '/inc/acf-json',
+              get_template_directory() . '/inc/acf-json'
+          );
 
-    return $paths;
+      }
+
+      return $paths;
   });
 /** Add filters to ACF-JSON **/
 
@@ -111,7 +123,7 @@
   
   /* (boolean) If set to true, this options page will redirect to the first child page (if a child page exists). 
   If set to false, this parent page will appear alongside any child pages. Defaults to true */
-  'redirect' => true,
+  'redirect' => false,
   
   /* (int|string) The '$post_id' to save/load data to/from. Can be set to a numeric post ID (123), or a string ('user_2'). 
   Defaults to 'options'. Added in v5.2.7 */
@@ -125,9 +137,11 @@
 
   if( function_exists('acf_add_options_page') ) {
     
-    acf_add_options_page($optionsPage);
+    $parent = acf_add_options_page($optionsPage);    
     
   }
 
 
 /* ----------------------------------------- Cria página "Opções" para o ACF */    
+
+

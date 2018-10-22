@@ -54,8 +54,8 @@
   function disable_metabox_from_taxonomies() {
       global $pagenow;
       if (in_array($pagenow, ['post.php', 'post-new.php'])) {
-          
-          $post_type = $pagenow == 'post-new.php' ? $_GET['post_type'] : get_post_type($_GET['post']);
+                  
+          $post_type = $pagenow == 'post-new.php' ? (isset($_GET['post_type']) ? $_GET['post_type'] : 'post') : get_post_type($_GET['post']);
           
           $taxonomies = get_object_taxonomies($post_type);
 
@@ -208,3 +208,82 @@ add_filter( 'admin_body_class', 'id_usuario_body_class' );
   }
   add_filter('upload_mimes', 'my_extra_upload_files');
 /* ----------------------------------------- Allow upload extra filetypes */    
+
+
+/* Add Custom Pages to Custom Post Types */
+/* ----------------------------------------- */
+  function get_my_custom_post_types() {
+    // Get all new CPTS
+    $post_types = get_post_types(['public' => true ]);
+    
+    // Remove default CPTS
+    unset($post_types['post']);
+    unset($post_types['page']);
+    unset($post_types['attachment']);
+
+    return $post_types;
+  }  
+
+  add_action('init', 'add_custom_pages_to_cpts', 99);
+  
+  function add_custom_pages_to_cpts() {
+    
+    $post_types = get_my_custom_post_types();
+
+    // If we still have CPTS
+    if ($post_types) {
+
+        foreach ($post_types as $post_type ) {
+          
+          $parent_slug = 'edit.php';
+          if ($post_type != 'post') {
+            $parent_slug .= '?post_type=' . $post_type;
+          }
+          acf_add_options_page([
+            'page_title' 	=> __('Configurações', 'pp') . ' ' . ucfirst($post_type),
+            'menu_title' 	=> __('Configurações', 'pp') . ' ' . ucfirst($post_type),            
+            'menu_slug' 	=> 'acf-'. $post_type,
+            'capability' 	=> 'edit_posts', 
+            'parent_slug'	=> $parent_slug,
+            'position'	=> false,
+            'redirect'	=> false,
+          ]);
+          
+        } // foreach
+    } // if
+
+  }  
+
+
+  add_action('admin_bar_menu', 'add_toolbar_items', 100);
+  function add_toolbar_items($admin_bar){
+    
+    // Get my registered CPT's
+    $post_types = get_my_custom_post_types();    
+
+    // If is post_type_archive
+    if (is_post_type_archive()) {
+      
+      // Get the current CPT
+      $post_type = get_query_var('post_type');
+
+      // IF the current CPT is on our registered CPTs
+      if (in_array($post_type, $post_types)) {
+        
+        // Add menu to edit page
+        $admin_bar->add_menu( array(
+          'id'    => 'edit-acf-'. $post_type,
+          'title' => 'Editar',
+          'href'  => get_admin_url(). 'edit.php?post_type='.$post_type.'&page=acf-'.$post_type,
+          'meta'  => array(
+            'title' => __('Editar', 'pp'),
+          ),
+        ));
+        
+      }
+    }
+  }
+
+/* ----------------------------------------- Add Custom Pages to Custom Post Types */
+
+
