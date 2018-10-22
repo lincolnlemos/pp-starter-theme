@@ -1,0 +1,126 @@
+
+@mixin header--mobile--01($menu-bar-height : 92px) {
+
+    @include media-breakpoint-down($pp-view-expand) {
+                
+        body {
+
+            &.mobilemenu--open {
+    
+                @include freeze();
+    
+                .header {
+                    
+                    &--mobilefull {
+    
+                        .navbar {
+                            &--container {
+                                animation: toggleMenu 350ms ease 1 forwards;
+                                z-index: 10;
+                            }
+                        }
+    
+                    }
+    
+                }
+    
+            }
+    
+        }
+    
+        .header {
+    
+            &--mobilefull {
+    
+                .navbar {
+    
+                    &--container {
+                        position: fixed;
+                        z-index: -10;
+                        opacity: 0;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        height: 100vh;
+                        width: 100vw;
+                        max-width: 100%;
+                        text-align: center;
+                        display: flex;								
+                        flex-direction: column;
+                        transition: 250ms ease all;
+                        flex-wrap: wrap;
+                    }
+    
+                    &--navigation {
+    
+                        display: flex;
+                        height: $menu-bar-height;
+                        width: 100%;
+                        background-color: #FBFBFB;
+    
+                        div {
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            min-width: 60px;
+                        }
+    
+                        &--current {
+                                width: 100%;
+                        }
+    
+                    }
+    
+                    ul {
+                        background-color: white;
+                        width: 100%;
+                        overflow-y: scroll;
+                        transition: 350ms ease-in-out;
+                        padding-bottom: 25vh;
+                        position: absolute;							
+                        top: $menu-bar-height;
+                        height: calc(100% - #{$menu-bar-height});
+                        
+                        // min-height: 100%;
+                        // height: 100%;
+    
+                        a {
+                            display: block;
+                        }
+    
+                        &.navbar--menu {								
+                            // position: relative;
+                            // z-index: 1;
+                            // display: flex;
+                            // flex-direction: column;
+                            // flex-grow: 1;
+                        }
+    
+                        &.sub-menu {
+                            display: block;
+                            top: 0;
+                            bottom: 0;				
+                            z-index: -1;
+                            opacity: 0;				
+                            height: auto;
+    
+                            &--visible {
+                                z-index: 2;
+                                opacity: 1;
+                            }
+    
+                        }
+    
+                    }
+    
+                }
+
+            }
+
+        }
+
+    } // @include media-breakpoint-down($view-expand)
+
+}
