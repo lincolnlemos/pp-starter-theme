@@ -1,7 +1,7 @@
 
 @mixin header--mobile--01($menu-bar-height : 92px) {
 
-    @include media-breakpoint-down($pp-view-expand) {
+    @include media-breakpoint-down($pp--view-expand) {
                 
         body {
 

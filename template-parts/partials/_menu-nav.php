@@ -6,7 +6,7 @@
 
     <nav class="navbar">
 
-      <a class="navbar--logo d-inline-block" href="<?php echo get_home_url(); ?>"> 
+      <a class="navbar--logo d-inline-block d-expand-none" href="<?php echo get_home_url(); ?>"> 
         
         <?php         
           // Se existir um $logotipoMobile cadastrado, altera as classes
@@ -25,8 +25,8 @@
         
       </a>
             
-      <span class="header--toggler js-toggle-menu d-inline-block d-lg-none icon-toggle" data-bodyclass="mobilemenu--open"></span>
-      <span class="header--searchicon d-inline-block icon-search d-lg-none"></span>
+      <span class="navbar--toggler js-toggle-menu d-inline-block d-lg-none icon-toggle" data-bodyclass="mobilemenu--open"></span>
+      <span class="navbar--searchicon d-inline-block icon-search d-lg-none"></span>
       
       <div class="navbar--container">
 

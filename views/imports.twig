@@ -1,0 +1,9 @@
+{# 
+    You can add sections
+#}
+{% if imports %}
+    {# {{ fn( 'pp_debug', imports ) }} #}
+    {% for key, data in imports %}        
+        {% include key~'.twig' with { data: data } %}
+    {% endfor %}
+{% endif %}

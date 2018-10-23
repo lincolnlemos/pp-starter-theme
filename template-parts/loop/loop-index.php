@@ -6,6 +6,9 @@
 	} elseif (is_404()) {
 		_loop('404');
 
+	} elseif (is_archive()) {
+		_loop('archive');
+
 	} elseif (is_single()) {
 		_loop('single');
 

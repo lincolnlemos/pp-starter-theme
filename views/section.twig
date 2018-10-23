@@ -36,9 +36,13 @@
                 {% include 'carousels/carousel-default.twig' with { sliders: data.carousel } %}
             {% endif %}
             
+            {% if imports %}
+                {% include 'imports.twig' with { imports: imports } %}
+            {% endif %}
+
             {% if data.cta %}
                 {% include 'acf/link.twig' with { data: data.cta } %}
-            {% endif %}            
+            {% endif %}
 
         {{ hasContainer ? '</div>' }}
     
