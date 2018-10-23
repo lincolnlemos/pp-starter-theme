@@ -1,6 +1,7 @@
 <?php
 
 // Setup Framework Base Functions
+require_once ('inc/timber.php'); // Functions to run after install theme
 require_once ('inc/activation.php'); // Functions to run after install theme
 require_once ('inc/setup.php');
 

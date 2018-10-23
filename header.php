@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<html <?php language_attributes(); ?> class="no-js">
-	<head>
-		<meta charset="<?php bloginfo( 'charset' ); ?>" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">		
-		<?php wp_head(); ?>
+<?php
+/**
+ * Third party plugins that hijack the theme will call wp_head() to get the header template.
+ * We use this to start our output buffer and render into the view/page-plugin.twig template in footer.php
+ *
+ * If you're not using a plugin that requries this behavior (ones that do include Events Calendar Pro and
+ * WooCommerce) you can delete this file and footer.php
+ *
+ * @package  WordPress
+ * @subpackage  Timber
+ * @since   Timber 0.1
+ */
 
-		<script> 
-			// Browser update
-			var $buoop = {notify:{e:-2,f:-3,o:-3,s:-2,c:-4},insecure:true,unsupported:true,api:5}; 
-			function $buo_f(){ 
-			 var e = document.createElement("script"); 
-			 e.src = "//browser-update.org/update.min.js"; 
-			 document.body.appendChild(e);
-			};
-			try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
-			catch(e){window.attachEvent("onload", $buo_f)}
-		</script>
-		
-	</head>
-
-	<body <?php body_class(); ?>>
-
-		<?php do_action('pp_header', 1); ?>
-
-
-
+$GLOBALS['timberContext'] = Timber::get_context();
+ob_start();

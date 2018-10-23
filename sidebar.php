@@ -1,7 +1,9 @@
-<aside id="sidebar" class="sidebar col-md-4">
-    <?php 
-    	if ( is_active_sidebar( 'sidebar-principal' ) ) :
-    	   dynamic_sidebar( 'sidebar-principal' );
-    	endif;
-    ?>
-</aside>
+<?php
+/**
+ * The Template for the sidebar containing the main widget area
+ *
+ * @package  WordPress
+ * @subpackage  Timber
+ */
+
+Timber::render( array( 'sidebar.twig' ), $data );
