@@ -1,0 +1,15 @@
+{#  
+    title
+    description
+    image
+    cta
+    link
+#}
+{% if data.items %}
+
+        {% for post in data.items %}        
+            {# {{ fn( 'pp_debug', post, false ) }} #}            
+            {% include 'tease.twig' with {'post' : post } %}            
+        {% endfor %}
+
+{% endif %}

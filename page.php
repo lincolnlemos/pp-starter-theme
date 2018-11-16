@@ -24,4 +24,14 @@
 $context = Timber::get_context();
 $post = new TimberPost();
 $context['post'] = $post;
-Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );
+$page_template = get_page_template_slug();
+$templates = array( 'page-' . $post->post_name . '.twig', 'page.twig' );
+if ($page_template) {
+	$page_template_slug = str_replace('template-parts/', '', $page_template);
+	$page_template_slug = str_replace('.php', '', $page_template_slug);
+	array_unshift( $templates, 'pages/'. $page_template_slug .'.twig' );	
+}
+if ( is_front_page() ) {
+	array_unshift( $templates, 'front-page.twig' );		
+}
+Timber::render( $templates, $context );

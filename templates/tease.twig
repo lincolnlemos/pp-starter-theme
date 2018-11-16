@@ -1,9 +1,38 @@
-<article class="tease tease-{{post.post_type}}" id="tease-{{post.ID}}">
+<article class="tease tease--{{post.post_type}}" id="tease--{{post.ID}}">
 	{% block content %}
-		<h2 class="h2"><a href="{{post.link}}">{{post.title}}</a></h2>
-		<p>{{post.preview}}</p>
-		{% if post.get_thumbnail %}
-			<img src="{{post.thumbnail.src}}" />
-		{% endif %}
+		<a href="{{post.link}}" class="anchor--default" title="{{post.title}}">
+			{% if post.imagem %}
+				{{ fn( 'set_image', post.imagem ) }}
+			{% endif %}			
+			<h2 class="tease--title">{{post.title}}</h2>			
+			{% if post.chamada %}
+				<p class="tease--chamada">{{ post.chamada }}</p>
+			{% endif %}
+			{% if post.post_type == 'pacotes' %}
+				<p class="tease--chamada">
+					{{post.chamada}}
+					{% if post.post_type == 'pacotes' %}
+						{% if post.idade_minima_recomendada %}
+							<span>
+								<span class="d-inline-block icon-fw-person"></span>
+								<span>{{ post.idade_minima_recomendada }}+ anos</span>
+							</span>		
+						{% endif %}
+						{% if post.idade_minima_recomendada %}
+							<span>
+								<span class="d-inline-block icon-fw-calendar"></span>
+								<span>Jan a Ago</span>
+							</span>		
+						{% endif %}
+						{% if post.index_estadia_minima %}
+							<span>
+								<span class="d-inline-block icon-fw-ampuleta"></span>
+								<span>{{ post.index_estadia_minima }}+ dias</span>
+							</span>		
+						{% endif %}
+					{% endif %}
+				</p>
+			{% endif %}
+		</a>
 	{% endblock %}
 </article>

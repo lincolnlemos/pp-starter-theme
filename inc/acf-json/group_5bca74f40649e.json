@@ -3,6 +3,25 @@
     "title": "[PARENT] - Medias",
     "fields": [
         {
+            "key": "field_5bd57ed370ab9",
+            "label": "Créditos",
+            "name": "credits",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5bca75176abd9",
             "label": "Link",
             "name": "link",
@@ -35,5 +54,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1540066302
+    "modified": 1540720345
 }

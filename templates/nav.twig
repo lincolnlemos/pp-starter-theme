@@ -1,0 +1,31 @@
+<nav class="navbar">
+
+    <a class="navbar--logo" href="{{ site.url }}" title="{{ _e( 'Ir para página inicial') }}"> 
+        {% set logoMobile =  fn('get_field', 'mobile_logotipo', 'options') %}
+        {% set logo =  fn('get_field', 'logotipo', 'options') %}
+        {# Se existir um $logotipoMobile cadastrado, altera as classes #}
+        {% set logoClass = logoMobile ? 'd-none d-expand-inline-block' : 'd-inline-block' %}        
+        {# Exibe o nome do site se não tiver logotipo  #}
+        {% set headerName =  logo ? '<img src="'~ logo ~'" class="'~ logoClass ~' img-fluid" alt="Logotipo '~ site.name ~'"/>' : site.name %}
+        {# Imprime o nome/logo do site #}
+        {{ headerName }}        
+        {# Se tiver logo no mobile, exibe #}
+        {{ logoMobile ? '<img src="'~ logoMobile ~'" class="d-inline-block d-expand-none img-fluid align-top" alt="Logotipo '~ site.name ~'"/>' }}
+    </a>
+        
+    <span class="navbar--toggler js-toggle-menu d-inline-block d-expand-none icon-toggle" data-bodyclass="nav--open"></span>
+    <span class="navbar--searchicon d-inline-block icon-search d-expand-none"></span>
+
+    <div class="navbar--container">
+
+        <div class="navbar--navigation d-expand-none">
+            <div class="navbar--navigation--back"><span></span></div>
+            <div class="navbar--navigation--current"></div>
+            <div class="navbar--navigation--close js-toggle-menu" data-bodyclass="nav--open"><span></span></div>
+        </div>
+        
+        {% include "menu.twig" with {'menu': menu.get_items, 'menuClass': 'navbar--menu'} %}        
+
+    </div>         
+
+</nav><!-- /.navbar-collapse -->   

@@ -1,0 +1,8 @@
+{# 
+    You can add sections
+#}
+{% if imports %}
+    {% for data in imports %}        
+        {% include data.tpl ~'.twig' with { data: data } %}
+    {% endfor %}
+{% endif %}

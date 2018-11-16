@@ -2,10 +2,10 @@
     data =>  [
         title
         description
-        cta
-        tipo_de_background (Cor,Imagem)
-        cor
-        image
+        cta        
+        bg_cor
+        bg_desktop
+        bg_mobile
     ]
     hasContainer => (container, fullwidth)
     tagTitle => (true, false)
@@ -13,27 +13,32 @@
         container
     ]
 #}
+{% if data %}        
 
-{% if data %}
-    
     <div 
         id="{{ sectionID }}" 
-        class="section {{ not hasContainer ? 'container' }}{{ class.container|default('text-center') }}"
-        {{ fn('set_inline_background', data) }}        
+        class="section {{ class.container|default('text-center') }} pos--rel "
+        {{ fn('pp_set_bg_color', data ) }}
     >
+        {{ fn( 'pp_set_bg_image', data ) }}
 
         {{ hasContainer ? '<div class="container">' }}
            
+            {% if data.headline %}
+                <p class="{{ class.title|default('section--headline') }}" >{{ data.headline }} </p>
+            {% endif %}
+            
             {% if data.titulo %}
                 <{{tagTitle|default('h2')}} class="{{ class.title|default('section--subtitle') }}" >{{ data.titulo }}</{{tagTitle|default('h2')}}>
             {% endif %}
+
             
             {% if data.descricao %}
-                <p class="{{ class.description|default('section--description') }}">{{ data.descricao }}</p>
+                <div class="{{ class.description|default('section--description') }}">{{ data.descricao }}</div>
             {% endif %}
             
             {% if data.carousel %}                
-                {% include 'carousels/carousel-default.twig' with { sliders: data.carousel } %}
+                {% include 'carousels/carousel.twig' with { data: data.carousel } %}
             {% endif %}
             
             {% if imports %}

@@ -1,10 +1,19 @@
 <?php 
 
-function pp_debug($var) {
+function pp_debug($var, $die = true) {
   echo '<pre>'.print_r($var,1). '</pre>';
-  die();
+  if ($die) {
+    die();
+  }
 }
 
+function images_url($file) {
+  echo get_images_url($file);
+}
+
+function get_images_url($file) {
+  return get_stylesheet_directory_uri() . '/assets/images/'. $file;
+}
 
 /*
 * Helper to create html tags with PHP
@@ -86,24 +95,90 @@ function _p($tag = 'p', $content, $args = []) {
 }
 
 
-// Recebe o 
-function set_inline_background($data) {
+/* Set Backgrounds */
+/* ----------------------------------------- */
   
-  $tipo = isset($data['tipo_de_background']) && $data['tipo_de_background'] ? $data['tipo_de_background'] : false;
-  if (!$tipo) return false;
+  function pp_set_bg_color($data) {        
+    
+    $hex = isset($data['bg_color']) && $data['bg_color'] ? $data['bg_color'] : false;
+
+    $output = '';
+
+    // If we have color set
+    if ($hex) {
+      $output = 'background-color: ' . $hex . ';';
+    }      
+
+    if ($output) {
+      return 'style="'.$output.'"' . set_data_color($hex); 
+    }
+    
+  }
+  
+  
+  function pp_set_bg_image($data) {
+    
+    $desktop = isset($data['bg_desktop']) && $data['bg_desktop'] ?  $data['bg_desktop'] : false;
+    $mobile = isset($data['bg_mobile']) && $data['bg_mobile'] ?  $data['bg_mobile'] : false;
+    
+    $desktop = $desktop && !is_array($desktop) ? wp_get_attachment($desktop) : $desktop;
+    $mobile = $mobile && !is_array($mobile) ? wp_get_attachment($mobile) : $mobile;
+    
+
+    if ($mobile) {
+      echo '<div class="lazy lazy--background pp-bg-mobile d-expand-none" data-bg="url(\''.$mobile['url'].'\')"></div>';
+    }
+
+    if ($desktop) {
+      echo '<div class="lazy lazy--background pp-bg-desktop" data-bg="url(\''.$desktop['url'].'\')"></div>';
+    }
+
+    if (isset($data['mask']) && $data['mask'] ) {
+      echo pp_set_mask();
+    }
+  }
+
+  function pp_set_mask() {
+    return apply_filters('pp_set_mask', '<div class="pp-bg-mask"></div>');
+  }
+/* ----------------------------------------- Set Backgrounds */
+
+function wp_get_attachment( $attachment_id, $size = 'full' ) {
+
+  $attachment = get_post( $attachment_id );
+  $href = wp_get_attachment_image_src($attachment_id, $size, 0);
+
+  $return = [
+    'alt' => get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true ),
+		'caption' => $attachment->post_excerpt,
+		'description' => $attachment->post_content,
+		'src' => $href[0],
+		'url' => $attachment->guid,
+		'title' => $attachment->post_title
+  ];
+  
+  $credits = get_field('credits', $attachment_id);
+  if ($credits) {
+    $return['credits'] = $credits;
+  }
+
+	return $return;
+}
+
+
+function set_image($post_id, $size = 'thumbnail', $attrs=[]) {
 
   $output = '';
 
-  if ($tipo == 'Cor' && $data['cor']) {
-    $output = 'background-color: ' . $data['cor'] . ';';
-  }
-  
-  if ($tipo == 'Imagem' && $data['image']) {
-    $output = 'background-image: url(' . get_acf_image_url($data['image']) . ');';
-  }
+  if ($post_id) {
 
-  if ($output) {
-    return 'style="'.$output.'"'; 
+    $data = wp_get_attachment($post_id, 'thumbnail');
+    
+    $output .= '<figure class="figure--'.$size.'">';
+      $output .= '<img class="lazy" data-src="'.$data['src'].'" title="'.$data['title'].'" alt="'.$data['alt'].'" />';
+    $output .= '</figure>'; 
+    
+    return $output;
   }
 
 }
@@ -174,21 +249,7 @@ return '<a href="'.$data['url'].'" '. $css_inline .' title="'.$data['title'].'" 
 
 
 
-// Recebe um array com os backgrounds e imprime as divs
-function pp_set_backgrounds($data) {
-  
-  $desktop = isset($data['background_desktop']) && $data['background_desktop'] ?  $data['background_desktop'] : false;
-  $mobile = isset($data['background_mobile']) && $data['background_mobile'] ?  $data['background_mobile'] : false;
-  
-  if ($desktop) {
-    echo '<div class="lazy lazy--background d-none d-md-block" data-bg="url(\''.$desktop['url'].'\')"></div>';
-  }
-  
-  if ($mobile) {
-    echo '<div class="lazy lazy--background d-md-none" data-bg="url(\''.$mobile['url'].'\')"></div>';
-  }
 
-}
 
 
 add_filter('acf/format_value/type=wysiwyg', 'format_value_wysiwyg', 5, 3);
@@ -207,3 +268,45 @@ function showBeforeMore($fullText){
   return $fullText;
 }
 
+function set_data_color($hex) {
+  
+  $colorBright = colorBright($hex);
+  if ($colorBright) {
+    return ' data-color="'.$colorBright. '" data-hex="'.$hex. '" ';
+  } else {
+    return false;
+  }
+}
+
+
+function colorBright($hex) {
+  // Check the length
+  $length = strlen($hex);
+  
+  if ($length == 7 | $length == 6) {
+
+    $hex = $length == 7 ? ltrim($hex, '#') : $hex;
+
+    //break up the color in its RGB components
+    $r = hexdec(substr($hex,0,2));
+    $g = hexdec(substr($hex,2,2));
+    $b = hexdec(substr($hex,4,2));
+
+    //do simple weighted avarage
+    //
+    //(This might be overly simplistic as different colors are perceived
+    // differently. That is a green of 128 might be brighter than a red of 128.
+    // But as long as it's just about picking a white or black text color...)
+    if($r + $g + $b > 382){
+        return 'light';
+    }else{
+        return 'dark';
+    }
+    
+
+  } else {
+    return false;
+  }
+
+  
+}

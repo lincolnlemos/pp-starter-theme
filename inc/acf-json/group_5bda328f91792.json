@@ -1,9 +1,9 @@
 {
-    "key": "group_5bca542e08c99",
-    "title": "[PARENT] - Clones - Section",
+    "key": "group_5bda328f91792",
+    "title": "[PARENT] - Clones - Section Wysiwyg",
     "fields": [
         {
-            "key": "field_5bca568103304",
+            "key": "field_5bda328f9e991",
             "label": "Título",
             "name": "titulo",
             "type": "text",
@@ -22,7 +22,7 @@
             "maxlength": ""
         },
         {
-            "key": "field_5bca56a203306",
+            "key": "field_5bda328f9ea32",
             "label": "Call to Action",
             "name": "cta",
             "type": "link",
@@ -37,10 +37,10 @@
             "return_format": "array"
         },
         {
-            "key": "field_5bca568903305",
+            "key": "field_5bda328f9ea72",
             "label": "Descrição",
             "name": "descricao",
-            "type": "textarea",
+            "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -50,13 +50,13 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": 4,
-            "new_lines": "br"
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         },
         {
-            "key": "field_5bca547c3b4fc",
+            "key": "field_5bda328f9eb01",
             "label": "Background Cor",
             "name": "bg_color",
             "type": "color_picker",
@@ -71,7 +71,7 @@
             "default_value": ""
         },
         {
-            "key": "field_5bd011d5bce36",
+            "key": "field_5bda328f9eb45",
             "label": "Background Desktop",
             "name": "bg_desktop",
             "type": "image",
@@ -95,7 +95,7 @@
             "mime_types": ""
         },
         {
-            "key": "field_5bd011dabce37",
+            "key": "field_5bda328f9ebd2",
             "label": "Background Mobile",
             "name": "bg_mobile",
             "type": "image",
@@ -141,5 +141,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1540363719
+    "modified": 1541026472
 }

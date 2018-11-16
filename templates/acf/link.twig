@@ -11,8 +11,8 @@
     {% set htmlTag = layout == 'button' ? 'span' : 'a' %}
 
     <{{ htmlTag }} 
-        class="btn" 
-        title="{{data.title}}"        
+        class="{{ data.class|default('btn') }}" 
+        title="{{ data.title }}"        
         
         {% if layout == 'default' %}
             {# Add href if is a link #}
@@ -21,8 +21,6 @@
             target="{{ data.target|default('_self') }}"
         {% endif %}
     >
-
         {{ data.title|default('Saiba Mais') }}
-
     </{{ htmlTag }}>
 {% endif %}

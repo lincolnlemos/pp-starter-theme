@@ -1,5 +1,5 @@
 {% if menu %}
-	<ul>
+	<ul class="{{ item.get_children ? 'sub-menu' : menuClass }}">
 	{% for item in menu %}
 		<li class="{{ item.classes | join(' ') }}">
 			<a target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>

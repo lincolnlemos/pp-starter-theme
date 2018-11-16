@@ -1,0 +1,46 @@
+{#  
+    title
+    description
+    image
+    cta
+    link
+#}
+{% if data.items %}
+
+        {% for item in data.items %}            
+            {# {{ fn( 'pp_debug', item, false ) }} #}
+            {# Define Variables #}
+            {% set hasLink = (item.cta.url or item.link) ? true : false %}
+            
+            <{{ hasLink ? 'a' : 'div' }} 
+                class="{{ hasLink ? 'anchor--default' }} {{ data.classItem|default('carousel--item pos--rel d-flex flex-column align-items-center justify-content-center') }}"
+                {{ hasLink ? 'href="' ~ item.cta.url ~ item.link ~ '"'}}                
+            >
+                
+                {% if item.title %}
+                    <p class="{{ class.sectionTitle|default('carousel--title') }}">{{ item.title }}</p>
+                {% endif %} 
+                
+                {% if item.subtitle %}
+                    <p class="{{ class.sectionSubtitle|default('carousel--subtitle') }}">{{ item.subtitle }}</p>
+                {% endif %}                 
+                
+                {% if item.description %}
+                    <p class="{{ class.sectionDescription|default('carousel--description') }}">{{ item.description }}</p>
+                {% endif %}            
+                
+                {% if item.image %}                
+                    <figure >
+                        {{ fn('_p', 'img:acf-image',item.image) }}
+                    </figure>
+                {% endif %}
+                
+                {% if item.cta %}
+                    {% include 'acf/link.twig' with { 'data': item.cta, 'layout': (hasLink ? 'button' : 'default' )  } %}
+                {% endif %}   
+
+            </{{ hasLink ? 'a' : 'div' }} >
+            
+        {% endfor %}
+
+{% endif %}

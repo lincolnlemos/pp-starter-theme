@@ -1,0 +1,19 @@
+{# 
+    items
+    id
+    class
+    layout
+#}
+{% if data %}
+    {# {{ fn( 'pp_debug', data, false ) }}     #}
+    <div 
+        {{ data.id ? 'id="' ~ data.id ~ '"' }}
+        class="carousel {{ data.class }} carousel--{{ data.layout|default('default') }}"
+    >        
+        {% block content %}					
+            {% include 'carousels/carousel-'~ data.layout|default('default') ~ '.twig' with { 'data' : data } %}
+		{% endblock %}            
+    
+    </div>
+    {% set data = false %}
+{% endif %}

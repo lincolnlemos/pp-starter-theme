@@ -38,8 +38,8 @@ add_action( 'wp_enqueue_scripts', 'pp_load_scripts' );
 
 function pp_load_admin_scripts() {
 
-	$path_js = get_template_directory_uri() . '/assets/js/';
-	$path_css = get_template_directory_uri() . '/assets/css/';
+	$path_js = get_stylesheet_directory_uri() . '/assets/js/admin/';
+	$path_css = get_stylesheet_directory_uri() . '/assets/css/admin/';
 	 
 	wp_enqueue_style( 'custom-admin-style', $path_css. 'admin-style.css');	
 }
@@ -59,21 +59,11 @@ if ( ! function_exists( 'pp_setup' ) ):
 		// Registers theme menu's 
 		register_nav_menus( array(
 			'primary' => __( 'Navegação Global', 'pp' ),
-			'secondary' => __( 'Navegação Local', 'pp' ),
+			'secondary' => __( 'Navegação Blog', 'pp' ),
 		) );
 
 }
 endif;
-
-
-// Adiciona tamanho de thumbs customizáveis
-add_action('init', 'add_custom_image_sizes');
-
-function add_custom_image_sizes() {
-	add_image_size('post-gallery', 750, 440, true); 
-	// add_image_size('slider-destaque', 1170, 350, true);
-	// add_image_size('imagem-thumb', 800, 600, true);
-}
 
 
 /* Excerpt */
@@ -135,3 +125,24 @@ add_action( 'widgets_init', 'twentyten_widgets_init' );
 	        return "<div class=\"responsive-container\">".$html."</div>";
 	}
 /* ----------------------------------------- Filtro para criar container responsivo nos embeds do the_content */		
+
+
+
+/* Adiciona classes ao body caso seja mobile */
+/* ----------------------------------------- */
+	function device_body_class ( $classes )  {
+			
+		if ( wp_is_mobile() ) {
+			$classes[] = 'mobile';		
+		} else {
+			$classes[] = 'desktop';
+		}
+		return $classes;
+	}
+	add_filter( 'body_class', 'device_body_class' );
+
+/* ----------------------------------------- Adiciona classes ao body caso seja mobile */
+
+
+
+

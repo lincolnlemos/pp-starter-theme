@@ -74,19 +74,19 @@
   });
 
   // Load from parent and child theme
-  add_filter('acf/settings/load_json', function($paths) {
-    $paths = array(get_template_directory() . '/inc/acf-json');
+  // add_filter('acf/settings/load_json', function($paths) {
+  //   $paths = array(get_template_directory() . '/inc/acf-json');
 
-      if(is_child_theme()){
-          $paths = array(
-              get_stylesheet_directory() . '/inc/acf-json',
-              get_template_directory() . '/inc/acf-json'
-          );
+  //     if(is_child_theme()){
+  //         $paths = array(
+  //             get_stylesheet_directory() . '/inc/acf-json',
+  //             get_template_directory() . '/inc/acf-json'
+  //         );
 
-      }
+  //     }
 
-      return $paths;
-  });
+  //     return $paths;
+  // });
 /** Add filters to ACF-JSON **/
 
 

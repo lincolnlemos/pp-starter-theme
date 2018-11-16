@@ -3,15 +3,30 @@
     "title": "[PARENT] - Clones - Backgrounds Desktop \/ Mobile",
     "fields": [
         {
+            "key": "field_5bd0157417f9e",
+            "label": "Background Cor",
+            "name": "bg_color",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "default_value": ""
+        },
+        {
             "key": "field_5bcb85ec84ada",
             "label": "Background Desktop",
-            "name": "background_desktop",
+            "name": "bg_desktop",
             "type": "image",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "35",
                 "class": "",
                 "id": ""
             },
@@ -29,13 +44,13 @@
         {
             "key": "field_5bcb85fd84adb",
             "label": "Background Mobile",
-            "name": "background_mobile",
+            "name": "bg_mobile",
             "type": "image",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "35",
                 "class": "",
                 "id": ""
             },
@@ -73,5 +88,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1540066277
+    "modified": 1540363693
 }

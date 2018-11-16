@@ -267,14 +267,6 @@ function _loop($file) {
   echo get_template_part('template-parts/loops/loop-' . $file);  
 }
 
-function images_url($file) {
-  echo get_images_url($file);
-}
-
-function get_images_url($file) {
-  return get_stylesheet_directory_uri() . '/assets/img/'. $file;
-}
-
 
 /* Posts Relacionados */
 /* ----------------------------------------- */
@@ -360,7 +352,7 @@ function pp_related($args = []) {
       $thumbnail = wp_get_attachment_image_src($image->ID, 'post-gallery');
       $thumbnail = $thumbnail[0];
       $gallery .= "
-        <figure href='".$image->guid."' data-caption='".$image->post_title."' data-fancybox='galeria-".$ids."'>
+        <figure href='".$image->guid."' data-caption='".$image->post_excerpt."' data-fancybox='galeria-".$ids."'>
           <img class='img-fluid' src='".$thumbnail."'>
           <figcaption>
             <p class='img-title'>".$image->post_title." <br> <small>".$image->post_excerpt."</small></p>          
@@ -480,7 +472,9 @@ function pp_related($args = []) {
 
 function custom_active_item_classes($classes = array(), $menu_item = false){            
   global $post;
-  $classes[] = ($menu_item->url == get_post_type_archive_link($post->post_type)) ? 'current-menu-item active' : '';
+  if ($post) {    
+    $classes[] = ($menu_item->url == get_post_type_archive_link($post->post_type)) ? 'current-menu-item active' : '';
+  }
   return $classes;
 }
 add_filter( 'nav_menu_css_class', 'custom_active_item_classes', 10, 2 );

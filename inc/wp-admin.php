@@ -260,8 +260,9 @@ add_filter( 'admin_body_class', 'id_usuario_body_class' );
     
     // Get my registered CPT's
     $post_types = get_my_custom_post_types();    
-
-    // If is post_type_archive
+    
+    
+    // Add Edit link to archive pages
     if (is_post_type_archive()) {
       
       // Get the current CPT
@@ -281,6 +282,28 @@ add_filter( 'admin_body_class', 'id_usuario_body_class' );
         ));
         
       }
+    
+    // Add view page to ACF Edit Pages
+    } elseif (is_admin() && isset($_GET['page']) && isset($_GET['post_type']) ) {
+      
+      // Get the current CPT
+      $post_type = $_GET['post_type'];
+
+      // IF the current CPT is on our registered CPTs
+      if (in_array($post_type, $post_types)) {
+        
+        // Add menu to edit page
+        $admin_bar->add_menu( array(
+          'id'    => 'view-acf-'. $post_type,
+          'title' => 'Ver ' . ucfirst($post_type),
+          'href'  => get_post_type_archive_link($post_type),
+          'meta'  => array(
+            'title' => __('Ver ', 'pp') . ucfirst($post_type),
+          ),
+        ));
+        
+      }
+
     }
   }
 

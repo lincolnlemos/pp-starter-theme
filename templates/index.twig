@@ -1,11 +1,16 @@
 {% extends "base.twig" %}
 
 {% block content %}
-	<h2>{{ foo }}</h2>
-	<p>{{ qux }}</p>
-	{% for post in posts %}
-		{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
-	{% endfor %}
+
+	<div class="facetwp-template">
+		{% for post in posts %}		
+			{% include ['tease-'~ post.post_type ~'.twig', 'tease.twig'] %}
+		{% endfor %}
+	</div>	
 	
-	{% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+	<div class="loop--navigation">
+		<button data-loading="Carregando..." class="fwp-load-more btn btn--dark">{{ load_more_text|default('Carregar mais') }}</button>
+	</div>
+	{# {% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %} #}
+
 {% endblock %}

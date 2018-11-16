@@ -13,7 +13,6 @@ require_once ('inc/vendor/wp_bootstrap_navwalker.php');
 
 // Custom functions for theming
 require_once ('inc/actions.php');
-require_once ('inc/custom-actions.php');
 require_once ('inc/custom-shortcakes.php');
 require_once ('inc/custom-functions.php');
 require_once ('inc/custom-helpers.php');

@@ -1,0 +1,33 @@
+{#  
+    title
+    description
+    image
+    cta
+    link
+#}
+{% if data.items %}
+
+    {% for postID in data.items %}            
+
+        {# Define Variables #}
+        {% set hasLink = (item.cta.url or item.link) ? true : false %}
+        
+        <{{ hasLink ? 'a' : 'div' }} 
+            class="{{ hasLink ? 'anchor--default' }} {{ data.classItem|default('carousel--item pos--rel d-flex flex-column align-items-center justify-content-center') }}"
+            {{ hasLink ? 'href="' ~ item.cta.url ~ item.link ~ '"'}}                
+        >
+            {% set img = fn( 'wp_get_attachment', postID ) %}
+            
+            <figure class="figure">            
+                <img src="{{ img.src }}" alt="{{ img.alt }} " class="img-fluid">
+                <figcaption>
+                    {{ img.credits ? '<span class="figure--credits">' ~ img.credits ~ '</span>' }}
+                    {{ img.description ? '<span class="figure--description">' ~ img.description ~ '</span>'  }}
+                </figcaption>
+            </figure>                
+
+        </{{ hasLink ? 'a' : 'div' }} >
+        
+    {% endfor %}
+
+{% endif %}
