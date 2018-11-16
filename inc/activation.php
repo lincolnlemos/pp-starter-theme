@@ -25,45 +25,68 @@
 /* ----------------------------------------- Clear Theme */		
 
 
-
-/* Cria páginas ao instalar o tema */
+/* Create Defaults page after install the theme */
 /* ----------------------------------------- */
-// programmatically create some basic pages, and then set Home and Blog
-// setup a function to check if these pages exist
-function the_slug_exists($post_name) {
-	global $wpdb;
-	if($wpdb->get_row("SELECT post_name FROM wp_posts WHERE post_name = '" . $post_name . "'", 'ARRAY_A')) {
-		return true;
-	} else {
-		return false;
+
+	add_action('after_switch_theme', 'pp_theme_initial_setup');	
+
+	function pp_theme_initial_setup () {
+		
+		// Create an array with the pages to create
+		$pages = [
+			// [Title, Content, 'Slug']
+			['Home', '', 'home'],
+			['Blog', '', 'blog'],
+			['Institucional', '', 'institucional'],
+			['Contato', '', 'contato'],
+		];
+
+		$check = get_option('pp_theme_initial_setup', false);
+
+		if ($pages && !$check) {
+
+			foreach ($pages as $page) {
+
+				$page_check = get_page_by_title($page[0]);
+
+				if(!isset($page_check->ID) && !the_slug_exists($page[2])){
+
+					$newPageId = wp_insert_post(array(
+						'post_type' => 'page',
+						'post_title' => $page[0],
+						'post_content' => $page[1],
+						'post_status' => 'publish',
+						'post_author' => 1,
+						'post_slug' => $page[2]
+					));
+
+					if ($page[0] == 'Home') {
+						 update_option( 'page_on_front', $newPageId ); 
+						 update_option( 'show_on_front', 'page' );
+					}
+
+					if ($page[0] == 'Blog') { 
+						update_option( 'page_for_posts', $newPageId );
+					}
+
+				}	
+			}
+			
+			// Prevents runs again after if you change the theme
+			update_option('pp_theme_initial_setup', true );
+
+		}
+
+
 	}
-}
 
-$paginas = [
-	// [Title, Content, 'Slug']
-	['Home', '', 'home'],
-	['Blog', '', 'blog'],
-	['Institucional', '', 'institucional'],
-	['Fale Conosco', '', 'fale-conosco'],
-];
-
-// Cria as páginas
-if (isset($_GET['activated']) && is_admin()){
-	foreach ($paginas as $pagina) {
-		$page_check = get_page_by_title($pagina[0]);
-		if(!isset($page_check->ID) && !the_slug_exists($pagina[2])){
-		    $newPageId = wp_insert_post(array(
-		    	'post_type' => 'page',
-		    	'post_title' => $pagina[0],
-		    	'post_content' => $pagina[1],
-		    	'post_status' => 'publish',
-		    	'post_author' => 1,
-		    	'post_slug' => $pagina[2]
-		    ));
-		    if ($pagina[0] == 'Home') { update_option( 'page_on_front', $newPageId ); update_option( 'show_on_front', 'page' ); }
-		    if ($pagina[0] == 'Blog') { update_option( 'page_for_posts', $newPageId ); }
-		}	
+	function the_slug_exists($post_name) {
+		global $wpdb;
+		if($wpdb->get_row("SELECT post_name FROM wp_posts WHERE post_name = '" . $post_name . "'", 'ARRAY_A')) {
+			return true;
+		} else {
+			return false;
+		}
 	}
-}
 
-/* ----------------------------------------- Cria páginas ao instalar o tema */	
+/* ----------------------------------------- Create Defaults page after install the theme */
