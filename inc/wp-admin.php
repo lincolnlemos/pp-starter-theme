@@ -82,7 +82,7 @@
   add_filter('login_headertitle', 'wpmidia_custom_wp_login_title');
 
   function wpmidia_custom_login() {
-      echo '<link media="all" type="text/css" href="'.get_stylesheet_directory_uri().'/assets/css/login-style.css" rel="stylesheet">';
+      echo '<link media="all" type="text/css" href="'.get_stylesheet_directory_uri().'/assets/css/admin/login-style.css" rel="stylesheet">';
       
       $logotipoID = get_field( 'logotipo', 'options', false );
       $img = wp_get_attachment_metadata($logotipoID);
