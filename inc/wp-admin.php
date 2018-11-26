@@ -18,7 +18,15 @@
      echo "<style type='text/css' media='screen'>
         #adminmenu #menu-posts-produto div.wp-menu-image:before { font-family:'FontAwesome' !important; content:'\\f0a4'; }  
      </style>";
+  }    
+  
+  add_action('admin_head', 'pp_color_on_dev_enviroment');
+  function pp_color_on_dev_enviroment() {
+    if (strstr($_SERVER['SERVER_NAME'],'partnerprogrammer.com')) {
+      echo '<style>#wpadminbar {background-color: darkgreen; }</style>';
+    }
   }
+
 /* ----------------------------------------- ADMIN MENU */    
 
 
