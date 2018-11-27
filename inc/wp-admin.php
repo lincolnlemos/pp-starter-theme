@@ -23,7 +23,7 @@
   add_action('admin_head', 'pp_color_on_dev_enviroment');
   function pp_color_on_dev_enviroment() {
     if (strstr($_SERVER['SERVER_NAME'],'partnerprogrammer.com')) {
-      echo '<style>#wpadminbar {background-color: darkgreen; }</style>';
+      echo '<style>body {background-color: lightgreen; }</style>';
     }
   }
 

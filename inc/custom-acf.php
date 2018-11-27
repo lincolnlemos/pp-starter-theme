@@ -79,12 +79,13 @@
 
       if(is_child_theme()){
           $paths = array(
+              get_template_directory() . '/inc/acf-json',
               get_stylesheet_directory() . '/inc/acf-json',
-              get_template_directory() . '/inc/acf-json'
           );
 
       }
-
+      // echo '<pre>'.print_r($paths,1). '</pre>';
+      // die();
       return $paths;
   });
 /** Add filters to ACF-JSON **/
