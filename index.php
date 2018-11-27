@@ -21,4 +21,7 @@ $templates = array( 'index.twig' );
 if ( is_home() ) {
 	array_unshift( $templates, 'blog.twig' );	
 }
+if ( is_front_page() ) {
+	array_unshift( $templates, 'front-page.twig' );		
+}
 Timber::render( $templates, $context );
