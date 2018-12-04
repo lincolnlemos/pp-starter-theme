@@ -44,6 +44,35 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_5c06c71de0ee4": {
+                    "key": "layout_5c06c71de0ee4",
+                    "name": "formulario",
+                    "label": "Formulário de Contato",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5c06c725e0ee6",
+                            "label": "Shortcode",
+                            "name": "shortcode",
+                            "type": "text",
+                            "instructions": "Copie e cole o shortcode do formulário aqui. Você pode acessar os formulários existentes em Contato > Formulários de Contato.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Adicionar Item",
@@ -73,5 +102,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1540094425
+    "modified": 1543948189
 }

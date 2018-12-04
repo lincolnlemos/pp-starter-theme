@@ -1,26 +1,27 @@
 {# 
-    data => [title,url,target]
+    link => [title,url,target]
     layout => (
         button => will not create anchor
         default => will create anchor
     )
 #}
-{% if data %}
-    
+
+{% if link %}
     {% set layout = layout|default('default') %}
     {% set htmlTag = layout == 'button' ? 'span' : 'a' %}
-
+    
     <{{ htmlTag }} 
-        class="{{ data.class|default('btn') }}" 
-        title="{{ data.title }}"        
+        class="{{ data.class|default('btn') }} {{ layout == 'button' ? ' hover--pointer' }}" 
+        title="{{ link.title }}"        
         
         {% if layout == 'default' %}
             {# Add href if is a link #}
-            href="{{ data.url }}"
+            href="{{ link.url }}"
             {# Add target if is a link #}
-            target="{{ data.target|default('_self') }}"
+            target="{{ link.target|default('_self') }}"
         {% endif %}
     >
-        {{ data.title|default('Saiba Mais') }}
+        {{ link.title|default('Saiba Mais') }}
     </{{ htmlTag }}>
+    
 {% endif %}
