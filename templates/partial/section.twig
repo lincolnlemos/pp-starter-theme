@@ -46,7 +46,7 @@
             {% endif %}
 
             {% if data.cta %}
-                {% include 'acf/link.twig' with { data: data.cta } %}
+                {% include 'acf/link.twig' with { link: data.cta } %}
             {% endif %}
 
         {{ hasContainer ? '</div>' }}
