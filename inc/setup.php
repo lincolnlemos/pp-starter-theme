@@ -1,36 +1,21 @@
 <?php
 
 
-/* Load Javascripts */
+/* Load Default Javascripts and Styles */
 /* ----------------------------------------- */
 
 function pp_load_scripts(){
  	
- // 	$path_js = get_template_directory_uri() . '/assets/js/';
- // 	$path_css = get_template_directory_uri() . '/assets/css/';
+ 	$path_js = get_template_directory_uri() . '/assets/js/';
+ 	$path_child_js = get_stylesheet_directory_uri() . '/assets/js/';
+	 
+	$path_css = get_template_directory_uri() . '/assets/css/';
+	$path_child_css = get_stylesheet_directory_uri() . '/assets/css/';
             		
-	// wp_deregister_script('jquery');	
-	// wp_deregister_script( 'wp-embed' );
+	wp_deregister_script('jquery');	
 
-	// wp_enqueue_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js', [], false, true);		
-	// wp_enqueue_script('gsap', '//cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js', ['jquery'], false, true);		
-	// wp_enqueue_script('gsap-css-plugin', '//cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/plugins/CSSPlugin.min.js', [], false, true);				
-	// wp_enqueue_script('gsap-css-rule-plugin', '//cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/plugins/CSSRulePlugin.min.js', [], false, true);				
-	// wp_enqueue_script('scrollmagic', '//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js', [], false, true);				
-	// wp_enqueue_script('scrollmagic--gsap', '//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.min.js', [], false, true);
-	// wp_enqueue_script('scrollmagic--debug', '//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js', ['scrollmagic'], false, true);				
-	// wp_enqueue_script('flickty', '//unpkg.com/flickity@2/dist/flickity.pkgd.min.js', [], false, true);				
-	// wp_enqueue_script('lazyload', '//cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/8.15.2/lazyload.min.js', [], false, true);				
-	// wp_enqueue_script('pp-main', $path_js . 'main.js', ['gsap', 'scrollmagic', 'flickty', 'lazyload'], false, true);
-	// wp_enqueue_script('pp-libs', $path_js . 'libs.js', [], false, true);
-	
-				
-	// wp_localize_script( 'jquery', 'siteVars', [] );
-  	
-  	// wp_enqueue_style( 'bootstrap', $path_css . 'bootstrap.css');
-  	// wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=');
-	// wp_enqueue_style( 'main', $path_css . 'main.css');
-  	// wp_enqueue_style( 'libs', $path_css . 'libs.css');
+	wp_enqueue_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js', [], false, true);
+	wp_enqueue_script('pp-main', $path_child_js . 'main.js', ['jquery'], false, true);
 
 }
 add_action( 'wp_enqueue_scripts', 'pp_load_scripts' );
@@ -44,6 +29,45 @@ function pp_load_admin_scripts() {
 	wp_enqueue_style( 'custom-admin-style', $path_css. 'admin-style.css');	
 }
 add_action('admin_enqueue_scripts', 'pp_load_admin_scripts');
+
+
+function add_inline_scripts_to_footer() { ?>
+	
+	<script type="text/javascript">
+		<?php // Lazyload https://github.com/verlok/lazyload ?>
+		(function (w, d) {
+			w.addEventListener('LazyLoad::Initialized', function (e) {
+				w.lazyLoadInstance = e.detail.instance;
+			}, false);
+			var b = d.getElementsByTagName('body')[0];
+			var s = d.createElement("script"); s.async = true;
+			var v = !("IntersectionObserver" in w) ? "8.16.0" : "10.19.0";
+			s.src = "https://cdn.jsdelivr.net/npm/vanilla-lazyload@" + v + "/dist/lazyload.min.js";
+			w.lazyLoadOptions = {
+				elements_selector: ".lazy",
+				callback_enter: function(element) {
+					logElementEvent('ENTERED', element);
+				},
+				callback_set: function(element) {
+					logElementEvent('SET', element);
+				},
+				callback_error: function(element) {
+					logElementEvent('ERROR', element);
+					// element.src = 'https://placeholdit.imgix.net/~text?txtsize=21&txt=Fallback%20image&w=220&h=280';
+				},
+			};
+			b.appendChild(s);
+		}(window, document));
+		function logElementEvent(eventName, element) {
+			console.log(Date.now(), eventName, element.getAttribute('data-bg'));
+		}			
+	</script>
+<?php
+}
+add_action( 'wp_footer', 'add_inline_scripts_to_footer' );
+
+
+
 
 // Runs a function after_setup_theme
 add_action( 'after_setup_theme', 'pp_setup' );
