@@ -6,7 +6,7 @@
 	</head>
 {% endblock %}
 
-	<body class="layout--grid {{body_class}}  nav--fixed" data-order="{{ fn( 'get_facet_order' ) }}" data-template="base.twig">
+	<body class="layout--grid {{body_class}}  nav--fixed"  data-template="base.twig">
 		<a class="skip-link sr-only screen-reader-text" href="#content">{{ _e( 'Ir para o conteúdo') }}</a>				
 		{% set headerClass = fn('apply_filters', 'pp_set_header_class', 'header' ) %}		
 		<header class="header {{ headerClass }} nav--down">
