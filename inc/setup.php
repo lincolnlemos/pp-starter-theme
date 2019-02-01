@@ -11,12 +11,28 @@ function pp_load_scripts(){
 	 
 	$path_css = get_template_directory_uri() . '/assets/css/';
 	$path_child_css = get_stylesheet_directory_uri() . '/assets/css/';
-            		
+	 
+	 $framework = get_template_directory_uri() . '/assets/framework/';
+	 
 	wp_deregister_script('jquery');	
 
 	wp_enqueue_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js', [], false, true);
 	wp_enqueue_script('pp-main', $path_child_js . 'main.js', ['jquery'], false, true);
 
+
+	// Only for Framework Test Purposes
+	if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'framework.pp') {		
+		
+		/* Prism JS */
+		/* ----------------------------------------- */
+			// https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+css-extras+markup-templating+php+scss+twig
+			wp_enqueue_script('prism-js', $framework . 'prism.js', ['jquery'], false, true);
+			wp_enqueue_style( 'prism-css', $framework. 'prism.css');
+		/* ----------------------------------------- Prism JS */
+		
+	}
+
+	
 }
 add_action( 'wp_enqueue_scripts', 'pp_load_scripts' );
 
