@@ -1,0 +1,22 @@
+
+
+
+/* Accordion FAQ 01 */
+/* ----------------------------------------- */
+    .acc {
+        &--faq01 {
+            
+            .acc {
+                &--item {
+                    &--header {
+                        cursor: pointer;
+                    }
+                    &--body {
+                        overflow: hidden;
+                        height: 0;
+                    }
+                }
+            }
+        }
+    }    
+/* ----------------------------------------- Accordion FAQ 01 */

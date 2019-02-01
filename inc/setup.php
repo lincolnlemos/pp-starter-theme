@@ -11,12 +11,29 @@ function pp_load_scripts(){
 	 
 	$path_css = get_template_directory_uri() . '/assets/css/';
 	$path_child_css = get_stylesheet_directory_uri() . '/assets/css/';
-            		
+	 
+	 $framework = get_template_directory_uri() . '/assets/framework/';
+	 
 	wp_deregister_script('jquery');	
 
-	wp_enqueue_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js', [], false, true);
+	wp_enqueue_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js', [], false, false);
 	wp_enqueue_script('pp-main', $path_child_js . 'main.js', ['jquery'], false, true);
 
+
+	// Only for Framework Test Purposes
+	if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'framework.pp') {		
+		
+		/* Prism JS */
+		/* ----------------------------------------- */
+			// https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+css-extras+markup-templating+php+scss+twig
+			wp_enqueue_script('prism-js', $framework . 'prism.js', ['jquery'], false, true);
+			wp_enqueue_style( 'prism-css', $framework. 'prism.css');
+			/* ----------------------------------------- Prism JS */
+			
+			wp_enqueue_style( 'framework-css', $path_css. 'framework.css');
+	}
+
+	
 }
 add_action( 'wp_enqueue_scripts', 'pp_load_scripts' );
 
@@ -29,43 +46,6 @@ function pp_load_admin_scripts() {
 	wp_enqueue_style( 'custom-admin-style', $path_css. 'admin-style.css');	
 }
 add_action('admin_enqueue_scripts', 'pp_load_admin_scripts');
-
-
-function add_inline_scripts_to_footer() { ?>
-	
-	<script type="text/javascript">
-		<?php // Lazyload https://github.com/verlok/lazyload ?>
-		(function (w, d) {
-			w.addEventListener('LazyLoad::Initialized', function (e) {
-				w.lazyLoadInstance = e.detail.instance;
-			}, false);
-			var b = d.getElementsByTagName('body')[0];
-			var s = d.createElement("script"); s.async = true;
-			var v = !("IntersectionObserver" in w) ? "8.16.0" : "10.19.0";
-			s.src = "https://cdn.jsdelivr.net/npm/vanilla-lazyload@" + v + "/dist/lazyload.min.js";
-			w.lazyLoadOptions = {
-				elements_selector: ".lazy",
-				callback_enter: function(element) {
-					logElementEvent('ENTERED', element);
-				},
-				callback_set: function(element) {
-					logElementEvent('SET', element);
-				},
-				callback_error: function(element) {
-					logElementEvent('ERROR', element);
-					// element.src = 'https://placeholdit.imgix.net/~text?txtsize=21&txt=Fallback%20image&w=220&h=280';
-				},
-			};
-			b.appendChild(s);
-		}(window, document));
-		function logElementEvent(eventName, element) {
-			console.log(Date.now(), eventName, element.getAttribute('data-bg'));
-		}			
-	</script>
-<?php
-}
-add_action( 'wp_footer', 'add_inline_scripts_to_footer' );
-
 
 
 
