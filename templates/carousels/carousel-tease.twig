@@ -8,8 +8,7 @@
 {% if data.items %}
 
         {% for post in data.items %}        
-            {# {{ fn( 'pp_debug', post, false ) }} #}            
-            {% include 'tease.twig' with {'post' : post } %}            
+            {% include ['tease-'~ post.post_type ~'.twig', 'tease.twig'] with {'post' : post } %}    
         {% endfor %}
 
 {% endif %}

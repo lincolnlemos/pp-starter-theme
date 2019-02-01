@@ -31,43 +31,6 @@ function pp_load_admin_scripts() {
 add_action('admin_enqueue_scripts', 'pp_load_admin_scripts');
 
 
-function add_inline_scripts_to_footer() { ?>
-	
-	<script type="text/javascript">
-		<?php // Lazyload https://github.com/verlok/lazyload ?>
-		(function (w, d) {
-			w.addEventListener('LazyLoad::Initialized', function (e) {
-				w.lazyLoadInstance = e.detail.instance;
-			}, false);
-			var b = d.getElementsByTagName('body')[0];
-			var s = d.createElement("script"); s.async = true;
-			var v = !("IntersectionObserver" in w) ? "8.16.0" : "10.19.0";
-			s.src = "https://cdn.jsdelivr.net/npm/vanilla-lazyload@" + v + "/dist/lazyload.min.js";
-			w.lazyLoadOptions = {
-				elements_selector: ".lazy",
-				callback_enter: function(element) {
-					logElementEvent('ENTERED', element);
-				},
-				callback_set: function(element) {
-					logElementEvent('SET', element);
-				},
-				callback_error: function(element) {
-					logElementEvent('ERROR', element);
-					// element.src = 'https://placeholdit.imgix.net/~text?txtsize=21&txt=Fallback%20image&w=220&h=280';
-				},
-			};
-			b.appendChild(s);
-		}(window, document));
-		function logElementEvent(eventName, element) {
-			console.log(Date.now(), eventName, element.getAttribute('data-bg'));
-		}			
-	</script>
-<?php
-}
-add_action( 'wp_footer', 'add_inline_scripts_to_footer' );
-
-
-
 
 // Runs a function after_setup_theme
 add_action( 'after_setup_theme', 'pp_setup' );
