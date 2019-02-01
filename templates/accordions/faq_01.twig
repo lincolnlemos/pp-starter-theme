@@ -1,0 +1,67 @@
+{# 
+    || ACF Data
+    items: [
+        'question'  =>  'text_field',
+        'answer'    =>  'text_area'
+    ],
+    attrs: [
+        ID || elementID
+    ]
+
+#}
+
+{# JAVASCRIPT FILES
+
+    $(".expander").click(function(){
+        var $this = $(this),
+            $content = $this.find(".content");
+        if(!$this.hasClass("closed")){
+            TweenLite.to($content, 0.2, {height:0})
+            $this.addClass("closed")
+        }else{
+            //to open
+            // - temporarilty set height:auto
+            // - tween from height:0
+            TweenLite.set($content, {height:"auto"})
+            TweenLite.from($content, 0.2, {height:0})
+            $this.removeClass("closed");
+        }
+    })
+    
+{# /end JAVASCRIPT FILES #}
+
+{% if items %}
+    <div class="acc acc--faq01" id="{{ attrs.ID }}">
+        <div class="wrapper">
+            {% for item in items %}
+                <div class="acc--item acc--faq01--item closed">
+                    <div class="acc--item--header">
+                        <p>{{ item.question }}</p>
+                    </div>                    
+                    <div class="acc--item--body">
+                        {{ item.answer }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>                        
+        $(".acc--item").click(function(){
+            var $this = $(this),
+                $content = $this.find(".acc--item--body");
+            if(!$this.hasClass("closed")){
+                TweenLite.to($content, 0.2, {height:0})
+                $this.addClass("closed")
+            } else {
+                TweenLite.set($content, {height:"auto"})
+                TweenLite.from($content, 0.2, {height:0})
+                $this.removeClass("closed");
+            }
+        });
+    </script>
+{% endif %}
+
+
+
+{# {{ fn( 'pp_debug', data, true ) }} #}
