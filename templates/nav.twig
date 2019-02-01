@@ -13,15 +13,15 @@
         {{ logoMobile ? '<img src="'~ logoMobile ~'" class="d-inline-block d-expand-none img-fluid align-top" alt="Logotipo '~ site.name ~'"/>' }}
     </a>
         
-    <span class="navbar--toggler js-toggle-menu d-inline-block d-expand-none icon-toggle" data-bodyclass="nav--open"></span>
-    <span class="navbar--searchicon d-inline-block icon-search d-expand-none"></span>
+    <span class="navbar--toggler js-toggle-menu d-inline-block d-expand-none"></span>
+    <span class="navbar--searchicon d-inline-block d-expand-none"></span>
 
     <div class="navbar--container">
 
         <div class="navbar--navigation d-expand-none">
             <div class="navbar--navigation--back"><span></span></div>
             <div class="navbar--navigation--current"></div>
-            <div class="navbar--navigation--close js-toggle-menu" data-bodyclass="nav--open"><span></span></div>
+            <div class="navbar--navigation--close js-toggle-menu"><span></span></div>
         </div>
         
         {% include "menu.twig" with {'menu': menu.get_items, 'menuClass': 'navbar--menu'} %}        
