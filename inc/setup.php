@@ -16,7 +16,7 @@ function pp_load_scripts(){
 	 
 	wp_deregister_script('jquery');	
 
-	wp_enqueue_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js', [], false, true);
+	wp_enqueue_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js', [], false, false);
 	wp_enqueue_script('pp-main', $path_child_js . 'main.js', ['jquery'], false, true);
 
 
@@ -28,8 +28,9 @@ function pp_load_scripts(){
 			// https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+css-extras+markup-templating+php+scss+twig
 			wp_enqueue_script('prism-js', $framework . 'prism.js', ['jquery'], false, true);
 			wp_enqueue_style( 'prism-css', $framework. 'prism.css');
-		/* ----------------------------------------- Prism JS */
-		
+			/* ----------------------------------------- Prism JS */
+			
+			wp_enqueue_style( 'framework-css', $path_css. 'framework.css');
 	}
 
 	

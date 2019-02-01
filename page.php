@@ -34,4 +34,16 @@ if ($page_template) {
 if ( is_front_page() ) {
 	array_unshift( $templates, 'front-page.twig' );		
 }
+
+// Only for Framework Test Purposes
+if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'framework.pp') {
+	
+	// Check if the parent page is Blocks
+	if ($post->parent && get_the_title($post->parent) == 'Blocks') {
+		// Add a specific view for this page 	
+		array_unshift( $templates, 'examples/'. $post->slug .'.twig' );			
+	}
+
+}
+
 Timber::render( $templates, $context );
